@@ -35,10 +35,11 @@ async function contactsInit() {
 async function renderContacts() {
   await loadContactsFromServer();
   contacts.sort(function (a, b) {
-    return a[0].localeCompare(b[0]);
+      return a[0].localeCompare(b[0]);
   });
   showContacts();
 }
+
 
 /**
  * Gets an item from the contacts storage.
@@ -70,12 +71,16 @@ async function getItemContacts(key) {
  */
 async function loadContactsFromServer() {
   try {
-    contacts = JSON.parse(await getItemContacts("contacts"));
+      const serverContacts = JSON.parse(await getItemContacts("contacts")) || [];
+      contacts = [...contacts, ...serverContacts];
+      contacts = contacts.filter((contact, index, self) =>
+          index === self.findIndex((c) => c[0] === contact[0] && c[1] === contact[1] && c[2] === contact[2])
+      );
+      contacts.sort((a, b) => a[0].localeCompare(b[0]));
   } catch (e) {
-    console.error("Loading error:", e);
+      console.error("Loading error:", e);
   }
 }
-
 /**
  * Saves a new contact to the server by updating the 'contacts' array and storing it.
  * @param {any} newContact - The new contact to be added to the 'contacts' array.
@@ -284,14 +289,26 @@ async function createContact(event) {
  * @param {string} userName - The user name to be validated.
  * @returns {boolean} Returns true if the user name is valid, false otherwise.
  */
-function validateInput(userName) {
+function validateInput(userName, userEmail, userPhone) {
   let namePattern = /^[A-Za-z]+\s[A-Za-z]+$/;
+  let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  let phonePattern = /^\d{10,15}$/;
+
   if (!namePattern.test(userName)) {
-    document.getElementById("textNameInput-contacts").innerHTML = "Please enter a valid name (first name and last name).";
+    document.getElementById("textNameInput-contacts").innerHTML = "Please enter a valid full name.";
+    return false;
+  }
+  if (!emailPattern.test(userEmail)) {
+    document.getElementById("textEmailInput-contacts").innerHTML = "Please enter a valid email.";
+    return false;
+  }
+  if (!phonePattern.test(userPhone)) {
+    document.getElementById("textPhoneInput-contacts").innerHTML = "Please enter a valid phone number.";
     return false;
   }
   return true;
 }
+
 
 /**
  * Sorts the 'contacts' array based on the first names of the contacts.

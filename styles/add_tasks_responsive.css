@@ -614,12 +614,10 @@
   .frame211,
   .priority,
   .frame203 {
-    width: 512px;
+    width: 100%;
   }
 
-  #contentJoin {
-    margin-left: 40px;
-  }
+  
   .contentTask {
     display: flex;
     justify-content: center;
@@ -628,7 +626,7 @@
   }
 
   .content_addTask {
-    width: 100%;
+    width: 90%;
     margin-left: -10px;
   }
 
@@ -652,8 +650,15 @@
 
   .inputRight_addTask {
     margin-top: 50px;
+    width: 400px;
   }
+.inputLeft_addTask {
+  width: 400px !important;
+}
 
+.title_v1 {
+  width: 400px;
+}
   .title {
     font-size: 20px;
     width: 300px;
@@ -736,13 +741,13 @@
 
   .frame28 {
     display: flex;
-    width: 506px;
+    width: 400px;
     justify-content: space-evenly;
     flex-direction: column;
   }
 
   .priority {
-    width: 74%;
+    width: 100%;
     gap: 11px;
     margin-left: 0px;
   }
@@ -1560,6 +1565,7 @@
     justify-content: center;
     margin-left: 200px;
     flex-direction: column;
+    width: calc(100% - 232px);
   }
 
   .inputLeft_addTask {
@@ -1569,11 +1575,11 @@
   }
 
   .title_v1 {
-    width: 780px;
+    width: 100%;
   }
 
   .frame203 {
-    width: 780px;
+    width: 100%;
   }
 
   .title_frame14 {
@@ -1594,7 +1600,7 @@
   }
 
   .asignedTo_v1 {
-    width: 780px;
+    width: 100%;
   }
 
   .contactAvatar {
@@ -1650,7 +1656,7 @@
   }
 
   .frame28 {
-    width: 780px;
+    width: 100%;
   }
 
   .priority {

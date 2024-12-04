@@ -1,4 +1,4 @@
-let title = [];
+let title = []; 
 let description = [];
 let assigned = [];
 let selectedContacts = [];
